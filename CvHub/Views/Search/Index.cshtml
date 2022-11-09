@@ -1,0 +1,102 @@
+﻿@model Shared.Models.HomeViewModel
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@if (Request.IsAuthenticated)
+{
+    <h2>CVs</h2>
+    <div style="width: 100%;">
+        @foreach (var CV in Model.CVList)
+        {
+            <div class="card mb-3" style="width: 25%; margin: 0 4%; box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); display: inline-block;">
+                <div class="card-body">
+                    <h5 class="card-title">@CV.FirstName @CV.LastName</h5>
+                    <h6 class="card-subtitle text-muted">@CV.UserProfession</h6>
+                </div>
+                @{ var imagepath = "/UploadedImages/" + CV.ImagePath;}
+                <img src="@imagepath" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size: 1.125rem; text-anchor: middle" />
+                <rect width="100%" height="100%" fill="#868e96"></rect>
+
+
+                <div class="card-body">
+                    <p class="card-text">@CV.Bio</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@CV.Gender</li>
+                </ul>
+                <div class="card-body">
+                    <button type="button" class="btn btn-primary" onclick="location.href = '@Url.Action("Details","MyProfilePage", new{CV.Id}, null)'">View profile</button>
+                </div>
+            </div>
+        }
+    </div>
+    <h2>Projects</h2>
+    <div style="width: 100%; display: flex; ">
+        <div class="CVdivs" style="margin-top: 15vh; display: inline-block; justify-content: center; align-items: center; width: 100%" ;>
+            @foreach (var project in @Model.ProjectList)
+            {
+                <div class="card border-primary mb-3" style="width: 45%; margin: 20px; box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); border: none; display: inline-block">
+                    <div class="card-header">Header</div>
+                    <div class="card-body">
+                        <h4 class="card-title">@project.Title</h4>
+                        <p class="card-text">@project.Description</p>
+                        <button type="button" class="btn btn-primary" onclick="location.href = '@Url.Action("Details","Project", new{@id = project.Id}, null)'" )>View project</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+}
+else
+{
+    <div style="width: 100%; display: inline-block; float: right;">
+        @foreach (var CV in Model.CVListPublic)
+        {
+            <div class="card mb-3" style="width: 25%; margin: 0 4%; box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); display: inline-block;">
+                <div class="card-body">
+                    <h5 class="card-title">@CV.FirstName @CV.LastName</h5>
+                    <h6 class="card-subtitle text-muted">@CV.UserProfession</h6>
+                </div>
+                @{ var imagepath = "/UploadedImages/" + CV.ImagePath;}
+                <img src="@imagepath" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size: 1.125rem; text-anchor: middle" />
+                <rect width="100%" height="100%" fill="#868e96"></rect>
+
+
+                <div class="card-body">
+                    <p class="card-text">@CV.Bio</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@CV.Gender</li>
+                </ul>
+                <div class="card-body">
+                    <button type="button" class="btn btn-primary" onclick="location.href = '@Url.Action("Details","MyProfilePage", new{CV.Id}, null)'">View profile</button>
+                </div>
+            </div>
+        }
+    </div>
+    <h2>Projects</h2>
+    <div style="width: 100%; display: flex; ">
+        <div class="CVdivs" style="margin-top: 15vh; display: inline-block; justify-content: center; align-items: center; width: 100%" ;>
+            @foreach (var project in @Model.ProjectList)
+            {
+                <div class="card border-primary mb-3" style="width: 45%; margin: 20px; box-shadow: 0 3px 10px rgb(0 0 0 / 0.2); border: none; display: inline-block">
+                    <div class="card-header">Header</div>
+                    <div class="card-body">
+                        <h4 class="card-title">@project.Title</h4>
+                        <p class="card-text">@project.Description</p>
+                        <button type="button" class="btn btn-primary" onclick="location.href = '@Url.Action("Details","Project", new{@id = project.Id}, null)'" )>View project</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,100 @@
+﻿@using Data.Repositories
+@using Helpers
+@using Shared
+@model CvHub.Models.RegisterCVViewModel
+@{
+    ViewBag.Title = "RegisterCV";
+    CvHelper cvHelper = new CvHelper();
+    ProfessionHelper professionHelper = new ProfessionHelper(cvHelper.GetApplicationDbContext());
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("RegisterCV", "Account", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a CV.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.FirstName,  new { @class = "form-control" } )
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" } )
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" } )
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Adress, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Adress, new { @class = "form-control" } )
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.BirthDate, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.BirthDate, new {@class= "form-control", id = "BirthDate" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Gender,
+                new SelectList(cvHelper.GetGenders()),
+                "Select Gender")
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Profession, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Profession,
+               new SelectList(professionHelper.GetProfessionNames()),
+                "Select Profession")
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Bio, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Bio, new { @class = "form-control", @cols = 15, @rows = 8 })
+        </div>
+    </div>
+
+    <input type="file" name="Image" value="Pick a pic" />
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SetPrivate, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(m => m.SetPrivate)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary" value="Register" > Register </button>
+        </div>
+    </div>
+
+
+}
+<link href="@Url.Content("~/Content/themes/base/jquery-ui.min.css")" rel="stylesheet" />
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="@Url.Content("~/Scripts/jquery-3.4.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.13.0.min.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#BirthDate').datepicker({ changeMonth: true, changeYear: true, yearRange: "1900:" + new Date().getFullYear(), dateFormat: "yy-mm-dd" });
+        })
+    </script>
+}

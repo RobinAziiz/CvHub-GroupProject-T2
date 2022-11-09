@@ -1,0 +1,73 @@
+﻿@using Data.Models
+@using Shared
+@model Shared.Models.ProjectViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var showCount = Model.PublicParticipantCount;
+    var showList = Model.PublicParticipants;
+    if (Request.IsAuthenticated)
+    {
+        showCount = Model.ParticipantCount;
+        showList = Model.Participants;
+    }
+}
+
+
+
+<body style="background-color: ">
+    <div class="card text-white bg-primary mb-3" style="">
+        <div class="card-body">
+            <h4 class="card-title" style="text-align: center">@Model.Title</h4>
+            <p class="card-text" style="text-align: center">@Model.Description</p>
+        </div>
+    </div>
+    @if (Model.AllowEdit)
+    {
+<button type="button" class="btn btn-primary" onclick="location.href = '@Url.Action("Edit","Project", new{@Model.Id, @Model.ProjectId}, null)'" )>Edit Project</button>
+    }
+    <img src="/UploadedImages/@Model.ImagePath" style="max-width: 20em; float: right" />
+    <div class="" style="max-width: 25rem;">
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Host:</label>
+            <div class="col-sm-10">
+                <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="@Model.FirstNameOfCreator @Model.LastNameOfCreator" style="margin-left: 5%">
+            </div>
+        </div>
+  
+
+    </div>
+
+    <div>
+        <div class="form-group" style="margin-top: 10%">
+            <label for="exampleSelect2" class="form-label mt-4">Participants count @showCount</label>
+            <select multiple="" class="form-select" id="exampleSelect2">
+                @foreach (var participant in @showList)
+                {
+                    <option>@participant.FirstName @participant.LastName</option>
+                }
+</select>
+            </div>
+        </div>
+
+
+    @if(Request.IsAuthenticated){
+    if(!@Model.isParticipating){
+        <div class="card border-success mb-3" style="max-width: 20rem; margin-top: 3%">
+            <div class="card-header">Join in!</div>
+            <div class="card-body">
+                @Html.ActionLink("Join", "joinProject", "Project", new { projectID = @Model.Id }, new{@class = "btn btn-lg btn-primary" })
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border-success mb-3" style="max-width: 20rem; margin-top: 3%">
+            <div class="card-header">Leave project</div>
+            <div class="card-body">
+                @Html.ActionLink("Leave", "LeaveProject", "Project", new { projectID = @Model.Id }, new{@class = "btn btn-lg btn-primary" })
+            </div>
+        </div>
+    }
+    }
+    </body>

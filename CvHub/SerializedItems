@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CVToSerialize xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>0</Id>
+  <FirstName>Scott</FirstName>
+  <LastName>Jander</LastName>
+  <Visits>0</Visits>
+  <Projects>
+    <ProjectToSerialize>
+      <Title>Mitt jävla projekt2</Title>
+      <Description>Jobbar som fan2</Description>
+      <Creator>badabin2g</Creator>
+      <Users>
+        <string>scott</string>
+        <string>erik</string>
+      </Users>
+    </ProjectToSerialize>
+    <ProjectToSerialize>
+      <Title>Mitt jävla projekt</Title>
+      <Description>Jobbar som fan</Description>
+      <Creator>badabing</Creator>
+      <Users>
+        <string>scott</string>
+        <string>erik</string>
+      </Users>
+    </ProjectToSerialize>
+  </Projects>
+  <Educations>
+    <EducationsToSerialize>
+      <StartYear>0001-01-01T00:00:00.0002008</StartYear>
+      <EndYear>0001-01-01T00:00:00.0002011</EndYear>
+      <SchoolName>Gumme2</SchoolName>
+      <EducationName>Engelskalinj2en</EducationName>
+      <Description>låtsades plugga i 23 år</Description>
+    </EducationsToSerialize>
+    <EducationsToSerialize>
+      <StartYear>0001-01-01T00:00:00.0002008</StartYear>
+      <EndYear>0001-01-01T00:00:00.0002011</EndYear>
+      <SchoolName>Gumme</SchoolName>
+      <EducationName>Engelskalinjen</EducationName>
+      <Description>låtsades plugga i 3 år</Description>
+    </EducationsToSerialize>
+  </Educations>
+  <BirthDate>0001-01-01T00:00:00</BirthDate>
+  <Private>false</Private>
+  <Deactivated>false</Deactivated>
+</CVToSerialize>
